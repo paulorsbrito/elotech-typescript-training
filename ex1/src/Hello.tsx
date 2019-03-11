@@ -17,7 +17,7 @@ export default (props: Props) => {
 
     return (
         <>
-            <h1>{props.nome} - {count} : {context.teste}</h1>
+            <h1>{props.nome} - {count} : {context.teste} / {context.teste2} </h1>
             <input type="button" value="Click" onClick={onClick} />
         </>
     )
