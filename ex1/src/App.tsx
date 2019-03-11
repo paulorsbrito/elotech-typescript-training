@@ -1,27 +1,27 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import './App.css';
+import MenuList from './components/MenuList';
+import { Context } from './Context';
 import Home from './Hello';
-import { Provider, ContextProps } from './Context';
+import { Routes } from './Routes';
 
-class App extends Component {
+export default (props: any) => {
 
-  state:ContextProps = {
-    teste: 'abc',
-    updateTeste: (val:string) => this.setState({teste:val})
-  }
+  const [teste, setTeste] = useState('abc')
 
-  render() {
-    return (
-      <Provider value={this.state}>
-        <div className="App">
-          <header className="App-header">
-            <Home nome="Paulo Brito"/>
-          </header>
-        </div>
-      </Provider>
-    );
-  }
+  return (
+    <Context.Provider value={{ teste, setTeste }}>
+      <div>
+        <Home nome="Paulo Brito" />
+
+        <BrowserRouter>
+          <>
+            <MenuList />
+            <Routes />
+          </>
+        </BrowserRouter>
+      </div>
+    </Context.Provider>
+  );
 }
-
-export default App;

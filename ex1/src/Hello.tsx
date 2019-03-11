@@ -1,37 +1,24 @@
-import React from 'react'
-import { ContextProps, withContext, Consumer } from './Context';
+import React, { useContext, useState } from 'react';
+import { Context } from './Context';
 
 interface Props {
     nome: string
 }
 
-type State = {
-    count: number
-}
+export default (props: Props) => {
 
-export default class Home extends React.Component<Props, State> {
+    const [count, setCount] = useState(0)
+    const context = useContext(Context)
 
-    state: State = {
-        count: 0
+    const onClick = (event: React.MouseEvent<HTMLInputElement>) => {
+        setCount(count + 1)
+        context.setTeste('context ' + count)
     }
 
-    onClick = (event:React.MouseEvent<HTMLInputElement>) =>    
-        this.setState(state => ({count: state.count + 1}))
-
-
-    render() {
-        // Eu queria usar o withContext e receber o context no props, 
-        // e não precisar usar o Consumer e essa função feia ai...
-        return (<>
-            
-            <Consumer>
-                {(context) => <>
-                    <h1>{this.props.nome} - {this.state.count} : {context.teste}</h1>
-
-                    <input type="button" value="Click" onClick={() => context.updateTeste('123')}/>
-                </>}
-            </Consumer>
-        </>)
-    }
+    return (
+        <>
+            <h1>{props.nome} - {count} : {context.teste}</h1>
+            <input type="button" value="Click" onClick={onClick} />
+        </>
+    )
 }
-
