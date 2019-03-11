@@ -11,8 +11,9 @@ export default (props: Props) => {
     const context = useContext(Context)
 
     const onClick = (event: React.MouseEvent<HTMLInputElement>) => {
-        setCount(count + 1)
-        context.setTeste('context ' + count)
+        let val = count + 1
+        setCount(val)
+        context.setTeste('context ' + val)
     }
 
     return (
